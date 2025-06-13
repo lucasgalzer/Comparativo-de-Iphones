@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comparativo Interativo: iPhone 16e vs. iPhone 15</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Calm Harmony (Background: #F8F7F4, Text: #1F2937, Accent 15: #AEC6CF, Accent 16e: #B3D5C8) -->
+    <!-- Application Structure Plan: A single-page dashboard design with a sticky navigation for quick access to thematic comparison sections (Performance, Camera, Design, Verdict). The structure prioritizes at-a-glance comparison through side-by-side layouts and visual charts, moving away from a linear report format to enhance user exploration and understanding. The flow guides the user from a high-level overview to detailed comparisons and a final, data-driven verdict. -->
+    <!-- Visualization & Content Choices: Report Info -> Key Specs (Price, Chip); Goal -> Compare; Viz -> Bar Chart (Chart.js); Interaction -> Static visual; Justification -> Quantify performance difference simply. Report Info -> Overall Comparison; Goal -> Synthesize; Viz -> Radar Chart (Chart.js); Interaction -> Static visual; Justification -> Provide a holistic, multi-faceted summary of strengths/weaknesses. Report Info -> Feature Differences (Camera, MagSafe); Goal -> HTML checklists with icons; Interaction -> Static; Justification -> Clearly and quickly highlight feature presence/absence. CONFIRMATION: NO SVG/Mermaid used. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8F7F4;
+            color: #1F2937;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .nav-link {
+            transition: color 0.3s, border-bottom-color 0.3s;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="text-center py-8 md:py-12 px-4">
+        <h1 class="text-4xl md:text-5xl font-bold text-gray-800">iPhone 16e vs. iPhone 15</h1>
+        <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">Um comparativo interativo para ajudar você a decidir qual o melhor iPhone para suas necessidades.</p>
+    </header>
+
+    <nav id="navbar" class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-center items-center h-16 space-x-4 md:space-x-8 overflow-x-auto">
+                <a href="#visao-geral" class="nav-link text-gray-500 hover:text-gray-900 border-b-2 border-transparent hover:border-gray-900 py-1 text-sm md:text-base whitespace-nowrap">Visão Geral</a>
+                <a href="#desempenho" class="nav-link text-gray-500 hover:text-gray-900 border-b-2 border-transparent hover:border-gray-900 py-1 text-sm md:text-base whitespace-nowrap">Desempenho & Bateria</a>
+                <a href="#cameras" class="nav-link text-gray-500 hover:text-gray-900 border-b-2 border-transparent hover:border-gray-900 py-1 text-sm md:text-base whitespace-nowrap">Câmeras</a>
+                <a href="#tela-design" class="nav-link text-gray-500 hover:text-gray-900 border-b-2 border-transparent hover:border-gray-900 py-1 text-sm md:text-base whitespace-nowrap">Tela & Design</a>
+                <a href="#veredicto" class="nav-link text-gray-500 hover:text-gray-900 border-b-2 border-transparent hover:border-gray-900 py-1 text-sm md:text-base whitespace-nowrap">Veredito Final</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto p-4 md:p-8">
+        
+        <section id="visao-geral" class="pt-16 -mt-16">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800">Visão Geral Comparativa</h2>
+                <p class="mt-2 text-gray-600 max-w-2xl mx-auto">Veja os principais atributos de cada modelo lado a lado. A escolha se resume a um processador de última geração e maior bateria contra um conjunto de câmeras mais versátil e recursos de conveniência como o MagSafe.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+                <div class="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center text-center border-t-4 border-[#AEC6CF]">
+                    <h3 class="text-2xl font-bold mb-4">iPhone 15</h3>
+                    <div class="w-48 h-64 bg-gray-200 rounded-lg flex items-center justify-center mb-4">
+                        <span class="text-gray-500 text-6xl">📱</span>
+                    </div>
+                    <p class="font-semibold text-xl text-blue-600">A partir de R$ 4.229</p>
+                    <div class="text-left w-full mt-6 space-y-3">
+                        <p class="flex items-center"><span class="text-xl mr-3">⚙️</span> <strong>Processador:</strong> A16 Bionic</p>
+                        <p class="flex items-center"><span class="text-xl mr-3">📸</span> <strong>Câmeras:</strong> Dupla (48MP + Ultrawide)</p>
+                        <p class="flex items-center"><span class="text-xl mr-3">📺</span> <strong>Tela:</strong> Dynamic Island</p>
+                        <p class="flex items-center"><span class="text-xl mr-3">⚡️</span> <strong>Carregamento:</strong> MagSafe & Qi</p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center text-center border-t-4 border-[#B3D5C8]">
+                    <h3 class="text-2xl font-bold mb-4">iPhone 16e</h3>
+                    <div class="w-48 h-64 bg-gray-200 rounded-lg flex items-center justify-center mb-4">
+                        <span class="text-gray-500 text-6xl">📱</span>
+                    </div>
+                    <p class="font-semibold text-xl text-green-600">Estimado R$ 3.959</p>
+                    <div class="text-left w-full mt-6 space-y-3">
+                        <p class="flex items-center"><span class="text-xl mr-3">⚙️</span> <strong>Processador:</strong> A18</p>
+                        <p class="flex items-center"><span class="text-xl mr-3">📸</span> <strong>Câmera:</strong> Única (48MP)</p>
+                        <p class="flex items-center"><span class="text-xl mr-3">📺</span> <strong>Tela:</strong> Notch tradicional</p>
+                        <p class="flex items-center"><span class="text-xl mr-3">⚡️</span> <strong>Carregamento:</strong> Apenas Qi</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="desempenho" class="pt-24 -mt-16">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800">Desempenho & Bateria</h2>
+                <p class="mt-2 text-gray-600 max-w-2xl mx-auto">O iPhone 16e leva vantagem com o chip A18, prometendo maior longevidade e eficiência. Sua bateria também se destaca, enquanto o iPhone 15 conta com a conveniência do ecossistema MagSafe.</p>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <h3 class="text-xl font-bold mb-4 text-center">Performance Relativa do Processador (CPU)</h3>
+                    <div class="chart-container">
+                        <canvas id="performanceChart"></canvas>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg flex flex-col justify-center">
+                    <h3 class="text-xl font-bold mb-4 text-center">Bateria e Carregamento</h3>
+                    <div class="space-y-6">
+                        <div class="text-center">
+                            <h4 class="font-semibold text-lg">iPhone 15</h4>
+                            <div class="flex justify-center items-center mt-2">
+                                <span class="text-3xl">🔋</span>
+                                <div class="w-full bg-gray-200 rounded-full h-4 ml-2"><div class="bg-[#AEC6CF] h-4 rounded-full" style="width: 80%"></div></div>
+                            </div>
+                            <p class="text-sm mt-2 text-gray-500">Boa autonomia, suficiente para um dia de uso.</p>
+                            <p class="text-sm mt-1 font-semibold text-blue-600">Suporte a MagSafe</p>
+                        </div>
+                        <div class="text-center">
+                            <h4 class="font-semibold text-lg">iPhone 16e</h4>
+                             <div class="flex justify-center items-center mt-2">
+                                <span class="text-3xl">🔋</span>
+                                <div class="w-full bg-gray-200 rounded-full h-4 ml-2"><div class="bg-[#B3D5C8] h-4 rounded-full" style="width: 100%"></div></div>
+                            </div>
+                            <p class="text-sm mt-2 text-gray-500">Excelente autonomia, dura "bem mais de 24h".</p>
+                            <p class="text-sm mt-1 font-semibold text-red-500">Sem suporte a MagSafe</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="cameras" class="pt-24 -mt-16">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800">Capacidades de Câmera</h2>
+                <p class="mt-2 text-gray-600 max-w-2xl mx-auto">Aqui a diferença é clara. O iPhone 15 oferece um sistema de câmera dupla muito mais versátil, ideal para quem ama fotografia. O iPhone 16e, com sua câmera única, foca no essencial com boa qualidade.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                 <div class="bg-white rounded-xl shadow-lg p-6 border-t-4 border-[#AEC6CF]">
+                    <h3 class="text-xl font-bold mb-4">iPhone 15</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start"><span class="text-green-500 mr-2">✔️</span><div><strong>Sistema Duplo:</strong> Principal 48MP + Ultrawide.</div></li>
+                        <li class="flex items-start"><span class="text-green-500 mr-2">✔️</span><div><strong>Versatilidade:</strong> Ideal para fotos de paisagem e com zoom óptico simulado.</div></li>
+                         <li class="flex items-start"><span class="text-green-500 mr-2">✔️</span><div><strong>Recursos Avançados:</strong> Sistema mais maduro e com mais funcionalidades de software.</div></li>
+                    </ul>
+                </div>
+                <div class="bg-white rounded-xl shadow-lg p-6 border-t-4 border-[#B3D5C8]">
+                    <h3 class="text-xl font-bold mb-4">iPhone 16e</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start"><span class="text-red-500 mr-2">❌</span><div><strong>Sistema Único:</strong> Apenas câmera principal de 48MP.</div></li>
+                        <li class="flex items-start"><span class="text-red-500 mr-2">❌</span><div><strong>Menos Versatilidade:</strong> Sem lente ultrawide para fotos com campo de visão amplo.</div></li>
+                        <li class="flex items-start"><span class="text-red-500 mr-2">❌</span><div><strong>Limitações:</strong> Sem ProRaw, modo macro e com sensor físico menor.</div></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="tela-design" class="pt-24 -mt-16">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800">Tela & Design</h2>
+                <p class="mt-2 text-gray-600 max-w-2xl mx-auto">Ambos possuem telas OLED de 6.1 polegadas de alta qualidade. A escolha se resume à sua preferência: a funcionalidade interativa do Dynamic Island do iPhone 15 ou o visual clássico do notch no iPhone 16e.</p>
+            </div>
+             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center">
+                    <h3 class="text-xl font-bold mb-4">iPhone 15: Dynamic Island</h3>
+                    <div class="w-full max-w-xs bg-gray-900 border-8 border-gray-700 rounded-3xl p-2">
+                        <div class="bg-black h-40 w-full rounded-2xl flex justify-center pt-2">
+                            <div class="h-6 w-28 bg-gray-900 rounded-full flex items-center justify-between px-2">
+                                <div class="w-4 h-4 rounded-full bg-green-500"></div>
+                                <div class="w-1 h-4 bg-gray-700"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="mt-4 text-center text-gray-600">Um entalhe interativo que exibe alertas, músicas e atividades em tempo real.</p>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center">
+                    <h3 class="text-xl font-bold mb-4">iPhone 16e: Notch Tradicional</h3>
+                    <div class="w-full max-w-xs bg-gray-900 border-8 border-gray-700 rounded-3xl p-2">
+                        <div class="bg-black h-40 w-full rounded-2xl flex justify-center pt-2">
+                            <div class="h-6 w-20 bg-gray-900 rounded-b-lg"></div>
+                        </div>
+                    </div>
+                    <p class="mt-4 text-center text-gray-600">Design clássico que abriga a câmera frontal e os sensores do Face ID.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="veredicto" class="pt-24 -mt-16">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800">Veredito Final: Qual Comprar?</h2>
+                 <p class="mt-2 text-gray-600 max-w-3xl mx-auto">Com uma diferença de preço tão pequena, a decisão não é sobre qual é mais barato, mas sobre quais recursos você mais valoriza. O gráfico abaixo resume os pontos fortes de cada um.</p>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <h3 class="text-xl font-bold mb-4 text-center">Pontuação Comparativa</h3>
+                    <div class="chart-container h-80 md:h-96">
+                        <canvas id="veredictoChart"></canvas>
+                    </div>
+                </div>
+                <div class="space-y-6">
+                    <div class="bg-white p-6 rounded-xl shadow-lg">
+                        <h3 class="text-xl font-bold text-gray-800">Compre o iPhone 15 se...</h3>
+                        <p class="mt-2 text-gray-600">...você busca um conjunto mais completo e refinado. A câmera dupla versátil, a conveniência do MagSafe e o design com Dynamic Island justificam a pequena diferença de preço para a maioria dos usuários. É a melhor opção para quem quer uma experiência "flagship" com poucos compromissos.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-lg">
+                        <h3 class="text-xl font-bold text-gray-800">Compre o iPhone 16e se...</h3>
+                        <p class="mt-2 text-gray-600">...sua prioridade máxima é o desempenho do processador mais recente e a maior autonomia de bateria possível. Se você não se importa com a câmera única e a ausência de MagSafe, o iPhone 16e oferece a tecnologia de CPU mais nova por um preço ligeiramente menor.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="text-center py-8 mt-12 bg-gray-100">
+        <p class="text-gray-500">Relatório Interativo gerado com base em dados de mercado e análises de lançamento.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const data = {
+                performance: {
+                    labels: ['Performance da CPU'],
+                    datasets: [{
+                        label: 'iPhone 15 (A16)',
+                        data: [90],
+                        backgroundColor: '#AEC6CF',
+                        borderColor: '#AEC6CF',
+                        borderWidth: 1
+                    }, {
+                        label: 'iPhone 16e (A18)',
+                        data: [100],
+                        backgroundColor: '#B3D5C8',
+                        borderColor: '#B3D5C8',
+                        borderWidth: 1
+                    }]
+                },
+                veredicto: {
+                    labels: ['Desempenho', 'Bateria', 'Câmera', 'Tela & Design', 'Custo-Benefício'],
+                    datasets: [{
+                        label: 'iPhone 15',
+                        data: [4, 3.5, 5, 5, 4.5],
+                        fill: true,
+                        backgroundColor: 'rgba(174, 198, 207, 0.2)',
+                        borderColor: 'rgb(174, 198, 207)',
+                        pointBackgroundColor: 'rgb(174, 198, 207)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgb(174, 198, 207)'
+                    }, {
+                        label: 'iPhone 16e',
+                        data: [5, 5, 3, 4, 4],
+                        fill: true,
+                        backgroundColor: 'rgba(179, 213, 200, 0.2)',
+                        borderColor: 'rgb(179, 213, 200)',
+                        pointBackgroundColor: 'rgb(179, 213, 200)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgb(179, 213, 200)'
+                    }]
+                }
+            };
+
+            const chartOptions = {
+                plugins: {
+                    legend: {
+                        labels: {
+                            font: {
+                                family: 'Inter, sans-serif'
+                            }
+                        }
+                    }
+                }
+            };
+
+            const perfCtx = document.getElementById('performanceChart').getContext('2d');
+            new Chart(perfCtx, {
+                type: 'bar',
+                data: data.performance,
+                options: {
+                    ...chartOptions,
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            max: 110,
+                            ticks: { display: false },
+                            grid: { display: false },
+                        },
+                        y: {
+                           grid: { display: false },
+                           ticks: { font: { size: 14, family: 'Inter' } }
+                        }
+                    }
+                }
+            });
+
+            const veredictoCtx = document.getElementById('veredictoChart').getContext('2d');
+            new Chart(veredictoCtx, {
+                type: 'radar',
+                data: data.veredicto,
+                options: {
+                    ...chartOptions,
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    elements: {
+                        line: {
+                            borderWidth: 3
+                        }
+                    },
+                    scales: {
+                        r: {
+                            angleLines: {
+                                display: true
+                            },
+                            suggestedMin: 0,
+                            suggestedMax: 5,
+                            pointLabels: { font: { size: 12, family: 'Inter' } },
+                             ticks: {
+                                stepSize: 1
+                            }
+                        }
+                    }
+                }
+            });
+            
+            const navbar = document.getElementById('navbar');
+            const navLinks = navbar.querySelectorAll('a');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        navLinks.forEach(link => {
+                            link.classList.remove('text-gray-900', 'border-gray-900');
+                            link.classList.add('text-gray-500', 'border-transparent');
+                            if (link.getAttribute('href') === `#${id}`) {
+                                link.classList.add('text-gray-900', 'border-gray-900');
+                                link.classList.remove('text-gray-500', 'border-transparent');
+                            }
+                        });
+                    }
+                });
+            }, { rootMargin: '-50% 0px -50% 0px' });
+
+            document.querySelectorAll('section[id]').forEach(section => {
+                observer.observe(section);
+            });
+        });
+    </script>
+</body>
+</html>
